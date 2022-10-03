@@ -17,6 +17,7 @@ Vagrant.configure(2) do |config|
         echo "$NET_IP$((INIT_IP+1)) worker-node01" >> /etc/hosts
         echo "$NET_IP$((INIT_IP+2)) worker-node02" >> /etc/hosts
     SCRIPT
+    end
 
     config.vm.box = IMAGE_NAME
     config.vm.box_check_update = true
