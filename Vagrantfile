@@ -51,7 +51,7 @@ Vagrant.configure(2) do |config|
             etcd.vm.hostname = "k8s-etcd-#{i}"
             etcd.vm.network "private_network",  ip: NET_IP + "#{INIT_IP + 30}"
             etcd.vm.provider :virtualbox do |vb|
-                v.name    = "k8s-etcd-#{i}"
+                vb.name    = "k8s-etcd-#{i}"
                 vb.memory = 1024
                 vb.cpus = 1
             end
@@ -64,7 +64,7 @@ Vagrant.configure(2) do |config|
             calico.vm.network "private_network",  ip: NET_IP + "#{INIT_IP + 40}"
             calico.vm.hostname = "k8s-calico-#{i}"
             calico.vm.provider :virtualbox do |vb|
-                v.name    = "k8s-calico-#{i}"
+                vb.name    = "k8s-calico-#{i}"
                 vb.memory = 1024
                 vb.cpus = 1
             end
