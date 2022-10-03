@@ -9,7 +9,7 @@ INIT_IP=1
 Vagrant.configure(2) do |config|
 
     Vagrant.configure(2) do |config|
-        config.vm.provision "file", source: "~/.ssh/id_rsa.pub", destination: "~/.ssh/me.pub"
+        config.vm.provision "file", source: ".ssh/id_rsa.pub", destination: "~/.ssh/me.pub"
         config.vm.provision "shell", env:{"NET_IP" => NET_IP, "INIT_IP" => INIT_IP}, inline: <<-SCRIPT
         apt-get update -y && apt install -y vim net-tools telnet git
         cat /home/vagrant/.ssh/me.pub >> /home/vagrant/.ssh/authorized_keys
