@@ -19,7 +19,7 @@ Vagrant.configure(2) do |config|
     (1..MASTERS).each do |i|
         config.vm.define "master-#{i}" do |master|
             master.vm.hostname = "k8s-master-#{i}"
-            master.vm.network "private_network", ip: NET_IP + "#{INIT_IP + 10}"
+            master.vm.network "private_network", ip: NET_IP + "#{i + 10}"
             master.vm.provider "virtualbox" do |vb|
                 vb.name = "k8s-master-#{i}"
                 vb.memory = 2048
@@ -31,7 +31,7 @@ Vagrant.configure(2) do |config|
     (1..NUM_NODES).each do |i|
         config.vm.define "node-#{i}" do |node|
             node.vm.hostname = "k8s-node"
-            node.vm.network "private_network", ip: NET_IP + "#{INIT_IP + 20}"
+            node.vm.network "private_network", ip: NET_IP + "#{i + 20}"
             node.vm.provider "virtualbox" do |vb|
                 vb.name = "k8s-node-#{i}"
                 vb.memory = 2048
@@ -43,7 +43,7 @@ Vagrant.configure(2) do |config|
     (1..ETCD).each do |i|
         config.vm.define "etcd-#{i}" do |etcd|
             etcd.vm.hostname = "k8s-etcd-#{i}"
-            etcd.vm.network "private_network",  ip: NET_IP + "#{INIT_IP + 30}"
+            etcd.vm.network "private_network",  ip: NET_IP + "#{i + 30}"
             etcd.vm.provider :virtualbox do |vb|
                 vb.name = "k8s-etcd-#{i}"
                 vb.memory = 1024
@@ -55,7 +55,7 @@ Vagrant.configure(2) do |config|
 
     (1..R_REFLETOR).each do |i|
         config.vm.define "calico-#{i}" do |calico|
-            calico.vm.network "private_network",  ip: NET_IP + "#{INIT_IP + 40}"
+            calico.vm.network "private_network",  ip: NET_IP + "#{i + 40}"
             calico.vm.hostname = "k8s-calico-#{i}"
             calico.vm.provider :virtualbox do |vb|
                 vb.name = "k8s-calico-#{i}"
