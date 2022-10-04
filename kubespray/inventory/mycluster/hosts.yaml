@@ -1,0 +1,84 @@
+all:
+    vars:
+        ansible_ssh_private_key_file: ~/.ssh/id_rsa
+
+    hosts:
+        # ------- ETCDS ------- #
+        k8s-env-etcd-1:
+            ansible_host: 192.168.50.31
+            ip: 192.168.50.31
+            access_ip: 192.168.50.31
+        k8s-env-etcd-2:
+            ansible_host: 192.168.50.32
+            ip: 192.168.50.32
+            access_ip: 192.168.50.32
+        k8s-env-etcd-3:
+            ansible_host: 192.168.50.33
+            ip: 192.168.50.33
+            access_ip: 192.168.50.33
+        # ------- MASTERS ------- #
+        k8s-env-master-1:
+            ansible_host: 192.168.50.11
+            ip: 192.168.50.11
+            access_ip: 192.168.50.11
+        k8s-env-master-2:
+            ansible_host: 192.168.50.12
+            ip: 192.168.50.12
+            access_ip: 192.168.50.12
+        k8s-env-master-3:
+            ansible_host: 192.168.50.13
+            ip: 192.168.50.13
+            access_ip: 192.168.50.13
+        # ------- NODES ------- #
+        k8s-env-node-1:
+            ansible_host: 192.168.50.21
+            ip: 192.168.50.21
+            access_ip: 192.168.50.21
+        k8s-env-node-2:
+            ansible_host: 192.168.50.22
+            ip: 192.168.50.22
+            access_ip: 192.168.50.22
+        k8s-env-node-3:
+            ansible_host: 192.168.50.23
+            ip: 192.168.50.23
+            access_ip: 192.168.50.23
+        # ------- CALICO ------- #
+        k8s-env-rr-1:
+            ansible_host: 192.168.50.41
+            ip: 192.168.50.41
+            access_ip: 192.168.50.41
+        k8s-env-rr-2:
+            ansible_host: 192.168.50.42
+            ip: 192.168.50.42
+            access_ip: 192.168.50.42
+        k8s-env-rr-3:
+            ansible_host: 192.168.50.43
+            ip: 192.168.50.43
+            access_ip: 192.168.50.43
+            
+    children:
+            kube-master:
+                hosts:
+                    k8s-env-master-1:
+                    k8s-env-master-2:
+                    k8s-env-master-3:
+            kube-node:
+                hosts:
+                    k8s-env-node-1:
+                    k8s-env-node-2:
+                    k8s-env-node-3:
+            etcd:
+                hosts:
+                    k8s-env-etcd-1:
+                    k8s-env-etcd-2:
+                    k8s-env-etcd-3:
+            calico-rr:
+                hosts: 
+                    k8s-env-rr-1:
+                    k8s-env-rr-2:
+                    k8s-env-rr-3:
+            k8s-cluster:
+                children:
+                    kube-master:
+                    kube-node:
+                    calico-rr:
