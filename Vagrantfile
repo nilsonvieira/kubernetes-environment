@@ -30,7 +30,7 @@ Vagrant.configure(2) do |config|
 
     (1..NUM_NODES).each do |i|
         config.vm.define "node-#{i}" do |node|
-            node.vm.hostname = "k8s-node"
+            node.vm.hostname = "k8s-node-#{i}"
             node.vm.network "private_network", ip: NET_IP + "#{i + 20}"
             node.vm.provider "virtualbox" do |vb|
                 vb.name = "k8s-node-#{i}"
@@ -56,9 +56,9 @@ Vagrant.configure(2) do |config|
     (1..R_REFLETOR).each do |i|
         config.vm.define "calico-#{i}" do |calico|
             calico.vm.network "private_network",  ip: NET_IP + "#{i + 40}"
-            calico.vm.hostname = "k8s-calico-#{i}"
+            calico.vm.hostname = "k8s-rr-#{i}"
             calico.vm.provider :virtualbox do |vb|
-                vb.name = "k8s-calico-#{i}"
+                vb.name = "k8s-rr-#{i}"
                 vb.memory = 1024
                 vb.cpus = 1
             end
