@@ -22,8 +22,8 @@ Vagrant.configure(2) do |config|
             master.vm.network "private_network", ip: NET_IP + "#{INIT_IP + 10}"
             master.vm.provider "virtualbox" do |vb|
                 vb.name = "k8s-master-#{i}"
-                vb.memory = 1024
-                vb.cpus = 1
+                vb.memory = 2048
+                vb.cpus = 2
             end
         end
     end
