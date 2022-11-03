@@ -5,6 +5,7 @@ services:
     image: haproxy:2.6
     volumes:
       - ./haproxy/haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg:ro
+      - ./haproxy/predator.pem:/etc/ssl/certs/predator.pem:ro
     ports:
       - "80:80"
       - "81:81"
